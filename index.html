@@ -38,7 +38,6 @@
 
         .container { max-width: 800px; margin: 0 auto; }
 
-        /* HEADER */
         header { 
             margin-bottom: 50px; 
             padding-bottom: 30px;
@@ -49,7 +48,6 @@
         h1 span { color: var(--accent-red); }
         .hero-desc { font-size: 1.1rem; color: var(--text-secondary); }
 
-        /* SECCIONES (TARJETAS) */
         section { 
             margin-bottom: 30px; 
             background: var(--section-bg);
@@ -74,7 +72,6 @@
             color: var(--accent-red);
         }
 
-        /* TEXTO Y LISTAS */
         p { margin-bottom: 15px; color: var(--text-secondary); }
         ul { list-style: none; }
         ul li { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; color: var(--text-secondary); }
@@ -83,17 +80,35 @@
         /* SKILLS */
         .skill-group { margin-bottom: 20px; }
         h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; color: var(--text-main); opacity: 0.8; }
-        .skill-icons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
+        .skill-icons { display: flex; flex-wrap: wrap; gap: 10px; }
         .skill-icons img { 
             height: 42px; 
             transition: transform 0.2s, filter 0.2s;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
         }
         .skill-icons img:hover { transform: scale(1.15); filter: brightness(1.2); }
+
+        /* REPOS / CATEGORIES HUB */
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .repo-card {
+            background: #252525;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .repo-card:hover {
+            background: #333333;
+            border-color: var(--accent-red);
+        }
+        .repo-card h4 { color: #fff; margin-bottom: 5px; }
+        .repo-card p { font-size: 0.85rem; margin-bottom: 0; }
 
         /* PROYECTO */
         .project-box {
@@ -143,63 +158,43 @@
 
         <section class="animate delay-1">
             <h2>🚀 Sobre mí</h2>
-            <p>Soy un chico al que le gusta la programación y la tecnología, con muchas ganas de aprender y crecer en el mundo del desarrollo de software. Me gusta crear proyectos prácticos, trabajar en equipo y mejorar continuamente mis habilidades.</p>
+            <p>Soy un chico al que le gusta la programación y la tecnología, con muchas ganas de aprender y crecer en el mundo del desarrollo de software.</p>
             <ul>
                 <li>💻 Amante del código y las buenas prácticas</li>
-                <li>📚 Aprendiz constante de nuevas tecnologías</li>
-                <li>🤝 Abierto a colaborar en proyectos interesantes</li>
-                <li>🌱 Actualmente profundizando en <b>Java, SQL, HTML, CSS y JavaScript</b></li>
+                <li>🌱 Actualmente profundizando en <b>Java, SQL y Web</b></li>
             </ul>
         </section>
 
         <section class="animate delay-2">
-            <h2>🛠️ Tecnologías y herramientas</h2>
-            
-            <div class="skill-group">
-                <h3>💻 Lenguajes de programación</h3>
-                <div class="skill-icons">
-                    <img src="https://skillicons.dev/icons?i=java,js,html,css" alt="Lenguajes" />
-                </div>
-            </div>
-
-            <div class="skill-group">
-                <h3>🗄️ Bases de datos</h3>
-                <div class="skill-icons">
-                    <img src="https://skillicons.dev/icons?i=mysql,sqlite,firebase" alt="Bases de Datos" />
-                </div>
-            </div>
-
-            <div class="skill-group">
-                <h3>🧰 Entornos de desarrollo</h3>
-                <div class="skill-icons">
-                    <img src="https://skillicons.dev/icons?i=eclipse,vscode,idea,androidstudio" alt="IDEs" />
-                </div>
-            </div>
-
-            <div class="skill-group">
-                <h3>🔧 Otras herramientas</h3>
-                <div class="skill-icons">
-                    <img src="https://skillicons.dev/icons?i=git,github,linux,ubuntu,windows,bash,bootstrap,notion,discord" alt="Tools" />
-                </div>
+            <h2>📂 Categorías y Repositorios</h2>
+            <p>Accede a mis recursos técnicos y documentación personal:</p>
+            <div class="repo-grid">
+                <a href="./git/" class="repo-card">
+                    <h4>🚀 Git Cheat Sheet</h4>
+                    <p>Mi guía rápida de comandos esenciales para Git y GitHub.</p>
+                </a>
+                <a href="https://github.com/danielbl-67?tab=repositories" target="_blank" class="repo-card">
+                    <h4>📦 Todos los Repos</h4>
+                    <p>Listado completo de mis proyectos en GitHub.</p>
+                </a>
             </div>
         </section>
 
-        <section class="animate delay-3">
-            <h2>📈 Objetivos</h2>
-            <ul>
-                <li>✔️ Finalizar con éxito el ciclo de <b>DAM</b></li>
-                <li>✔️ Desarrollar proyectos propios y en equipo</li>
-                <li>✔️ Crear un <b>portafolio sólido</b></li>
-                <li>✔️ Dar el salto al <b>mundo laboral como desarrollador</b></li>
-            </ul>
+        <section class="animate delay-2">
+            <h2>🛠️ Tecnologías</h2>
+            <div class="skill-group">
+                <div class="skill-icons">
+                    <img src="https://skillicons.dev/icons?i=java,js,html,css,mysql,eclipse,vscode,git,github,linux" alt="Tools" />
+                </div>
+            </div>
         </section>
 
         <section class="animate delay-3">
             <h2>🚧 Proyectos destacados</h2>
             <div class="project-box">
-                <h3 style="color: #fff; font-size: 1.1rem; opacity: 1;">🏋️‍♂️ GYMZY (Proyecto Final de Grado)</h3>
-                <p>Aplicación gratuita para los usuarios y enfocada en ser utilizada y gestionada por nutricionistas y entrenadores personales autónomos. (PD: Abierto a ideas y mejoras)</p>
-                <a href="https://github.com/danielbl-67/gymzy" target="_blank" class="btn-link">🔗 Repositorio en GitHub</a>
+                <h3 style="color: #fff; font-size: 1.1rem; opacity: 1;">🏋️‍♂️ GYMZY (Proyecto Final)</h3>
+                <p>Aplicación para nutricionistas y entrenadores personales autónomos.</p>
+                <a href="https://github.com/danielbl-67/gymzy" target="_blank" class="btn-link">🔗 Ver Repositorio</a>
             </div>
         </section>
 
@@ -213,10 +208,6 @@
                 <div class="contact-item">
                     <b>🐙 GitHub</b>
                     <a href="https://github.com/danielbl-67" target="_blank">github.com/danielbl-67</a>
-                </div>
-                <div class="contact-item">
-                    <b>📸 Instagram</b>
-                    <a href="https://www.instagram.com/danielbl_67/" target="_blank">@danielbl_67</a>
                 </div>
             </div>
         </section>
