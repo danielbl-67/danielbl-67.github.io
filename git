@@ -1,1 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Cheat Sheet - danielbl-67</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --accent: #58a6ff;
+            --code-bg: #010409;
+            --orange: #f0883e;
+            --green: #3fb950;
+        }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 { color: var(--accent); margin-bottom: 5px; }
+        h2 { color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 5px; font-size: 1.2rem; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            color: #ff7b72;
+            display: block;
+            margin: 5px 0;
+        }
+
+        .inline-code { display: inline; color: var(--orange); }
+
+        .badge {
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .badge-green { background: #238636; color: white; }
+        .badge-orange { background: #9e6a03; color: white; }
+
+        .highlight { color: var(--accent); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🚀 Git Cheat Sheet</h1>
+        <p>Guía rápida para <strong>danielbl-67</strong> | Control de versiones sin pánico</p>
+    </header>
+
+    <section class="card" style="margin-bottom: 20px; border-left: 4px solid var(--accent);">
+        <h2>¿git fetch o git pull? ¡No te confundas!</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>¿Qué hace?</th>
+                    <th>¿Afecta tu código?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code class="inline-code">git fetch</code></td>
+                    <td>🔎 Descarga cambios remotos</td>
+                    <td><span class="badge" style="background: #da3633;">❌ No</span></td>
+                </tr>
+                <tr>
+                    <td><code class="inline-code">git pull</code></td>
+                    <td>🔄 Descarga y <strong>fusiona</strong></td>
+                    <td><span class="badge badge-green">✅ Sí</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <small>💡 <em>Dato pro: <code>git pull</code> es igual a <code>fetch</code> + <code>merge</code>.</em></small>
+    </section>
+
+    <div class="grid">
+        <div class="card">
+            <h2>🛠️ Configuración (danielbl-67)</h2>
+            <code>git config --global user.name "danielbl-67"</code>
+            <code>git config --global user.email "tuemail@example.com"</code>
+            <code>git config --list</code>
+            <p><strong>Oh My Zsh:</strong></p>
+            <code>sh -c "$(curl -fsSL https://raw.github...)"</code>
+        </div>
+
+        <div class="card">
+            <h2>✏️ Gestión de Cambios</h2>
+            <p>Estado y Staging:</p>
+            <code>git status</code>
+            <code>git add .</code>
+            <code>git reset [archivo] <span style="color:gray"># Unstage</span></code>
+            <p>Commits:</p>
+            <code>git commit -m "Mensaje"</code>
+            <code>git commit --amend --no-edit <span style="color:gray"># Corregir último</span></code>
+        </div>
+
+        <div class="card">
+            <h2>🌱 Ramas (Branches)</h2>
+            <code>git branch -a <span style="color:gray"># Ver todas</span></code>
+            <code>git checkout -b [nombre] <span style="color:gray"># Crear y saltar</span></code>
+            <code>git switch [nombre] <span style="color:gray"># Cambiar rama</span></code>
+            <code>git merge [nombre] <span style="color:gray"># Fusionar</span></code>
+            <code>git branch -d [nombre] <span style="color:gray"># Borrar local</span></code>
+        </div>
+
+        <div class="card">
+            <h2>🕒 Historial y Reset</h2>
+            <code>git log --oneline --graph --all</code>
+            <code>git reset --hard [id_commit]</code>
+            <code>git stash <span style="color:gray"># Guardar cambios temporalmente</span></code>
+            <code>git stash pop <span style="color:gray"># Recuperar stash</span></code>
+        </div>
+
+        <div class="card">
+            <h2>🌐 Remotos y Forking</h2>
+            <code>git remote add origin git@github.com:danielbl-67/[repo].git</code>
+            <code>git push origin [rama]</code>
+            <p><strong>Trabajando con Upstream (Forks):</strong></p>
+            <code>git remote add upstream [URL_ORIGINAL]</code>
+            <code>git fetch upstream</code>
+            <code>git merge upstream/main</code>
+        </div>
+
+        <div class="card">
+            <h2>🔒 Claves SSH</h2>
+            <code>ssh-keygen -t rsa -b 4096 -C "email"</code>
+            <code>ssh -T git@github.com <span style="color:gray"># Testear conexión</span></code>
+        </div>
+    </div>
+
+    <footer style="margin-top: 30px; text-align: center; font-size: 0.8rem; opacity: 0.6;">
+        Comando útil personalizado: <code>git config --global alias.tree "log --graph --decorate --all --oneline"</code>
+    </footer>
+</div>
+
+</body>
+</html>
