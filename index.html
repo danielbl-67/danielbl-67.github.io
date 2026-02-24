@@ -4,40 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel Burdallo | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #000000;
-            --card-bg: #0a0a0a;
-            --accent: #ff0000;
-            --text-main: #ffffff;
-            --text-dim: #888888;
-            --border: #1a1a1a;
+            --bg-color: #f8f9fa;       /* Gris muy claro, casi blanco */
+            --text-main: #1a1a1a;      /* Negro suave para lectura */
+            --text-secondary: #555555; /* Gris para párrafos */
+            --accent-red: #ff0000;    /* El rojo de GYMZY para detalles */
+            --border-color: #e0e0e0;
+            --white: #ffffff;
         }
 
         /* --- ANIMACIONES --- */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .animate {
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        /* Retrasos para que aparezcan en cascada */
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        .delay-4 { animation-delay: 0.8s; }
-        .delay-5 { animation-delay: 1s; }
+        .animate { opacity: 0; animation: fadeIn 0.6s ease forwards; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -45,170 +33,190 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.6;
-            padding: 20px;
-            overflow-x: hidden;
+            line-height: 1.7;
+            padding: 40px 20px;
         }
 
-        .container { max-width: 800px; margin: 50px auto; }
+        .container { max-width: 750px; margin: 0 auto; }
 
+        /* --- CABECERA --- */
         header { 
-            text-align: left; 
             margin-bottom: 60px; 
-            border-left: 4px solid var(--accent);
-            padding-left: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--text-main);
         }
         
-        h1 { font-size: 3rem; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; }
-        h1 span { color: var(--accent); }
-        .subtitle { color: var(--text-dim); font-size: 1.2rem; }
+        h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
+        h1 span { color: var(--accent-red); }
+        .subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-top: 5px; }
 
-        section {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        section:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1);
-        }
+        /* --- SECCIONES --- */
+        section { margin-bottom: 50px; }
 
         h2 {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 20px;
             color: var(--text-main);
             display: flex;
             align-items: center;
-            gap: 15px;
-            text-transform: uppercase;
+            gap: 10px;
         }
 
-        h2::after {
+        h2::before {
             content: "";
-            height: 1px;
-            background: var(--border);
-            flex-grow: 1;
-        }
-
-        ul li {
-            list-style: none;
-            margin-bottom: 12px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        ul li::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 10px;
-            width: 8px;
+            width: 20px;
             height: 2px;
-            background: var(--accent);
+            background: var(--accent-red);
         }
 
+        p { color: var(--text-secondary); margin-bottom: 15px; }
+
+        /* --- LISTAS --- */
+        ul { list-style: none; }
+        ul li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+        }
+
+        /* --- SKILLS --- */
+        .skill-box { margin-bottom: 25px; }
+        h3 { font-size: 0.9rem; color: var(--text-main); margin-bottom: 10px; text-transform: uppercase; }
         .skill-icons {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            background: #050505;
-            padding: 20px;
-            border-radius: 4px;
+            gap: 8px;
+            padding: 10px 0;
         }
+        .skill-icons img {
+            height: 40px;
+            filter: grayscale(100%);
+            transition: 0.3s;
+        }
+        .skill-icons img:hover { filter: grayscale(0%); transform: scale(1.1); }
 
+        /* --- PROYECTOS --- */
         .project-card {
-            border: 1px solid var(--accent);
-            padding: 25px;
+            background: var(--white);
+            padding: 30px;
+            border: 1px solid var(--border-color);
             border-radius: 4px;
-            background: rgba(255, 0, 0, 0.02);
         }
+        .project-card h3 { font-size: 1.2rem; color: var(--accent-red); }
 
         .btn {
             display: inline-block;
             margin-top: 15px;
-            padding: 12px 25px;
-            background-color: var(--accent);
-            color: white;
+            padding: 10px 20px;
+            background-color: var(--text-main);
+            color: var(--white);
             text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-radius: 2px;
+            font-size: 0.9rem;
+            font-weight: 600;
             transition: 0.3s;
         }
+        .btn:hover { background-color: var(--accent-red); }
 
-        .btn:hover {
-            background-color: white;
-            color: black;
-            box-shadow: 0 0 15px var(--accent);
-        }
-
+        /* --- CONTACTO --- */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
         }
+        .contact-item b { display: block; font-size: 0.8rem; text-transform: uppercase; color: var(--accent-red); }
+        .contact-item a { color: var(--text-main); text-decoration: none; font-weight: 600; }
+        .contact-item a:hover { text-decoration: underline; }
 
-        .contact-item a { color: var(--accent); text-decoration: none; font-weight: bold; }
-
-        @media (max-width: 600px) { h1 { font-size: 2.2rem; } }
+        @media (max-width: 600px) { h1 { font-size: 1.8rem; } }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <header class="animate delay-1">
-            <h1>DANIEL <span>BURDALLO</span></h1>
-            <p class="subtitle">Desarrollador DAM | High Performance Coder</p>
+        
+        <header class="animate">
+            <h1>👋 ¡Hola! Soy <span>Daniel Burdallo</span></h1>
+            <p class="subtitle">🎓 Estudiante de <b>DAM</b> | 💡 Futuro desarrollador Full Stack</p>
         </header>
 
-        <section class="animate delay-2">
+        <section class="animate delay-1">
             <h2>🚀 Sobre mí</h2>
-            <p style="color: var(--text-dim); margin-bottom: 20px;">Estudiante de <b>DAM</b> enfocado en la eficiencia. Desarrollo software robusto con una estética limpia y funcional.</p>
+            <p>Soy un chico al que le gusta la programación y la tecnología, con muchas ganas de aprender y crecer en el mundo del desarrollo de software. Me gusta crear proyectos prácticos, trabajar en equipo y mejorar continuamente mis habilidades.</p>
             <ul>
-                <li>Amante del código y las buenas prácticas</li>
-                <li>Aprendiz constante de nuevas tecnologías</li>
-                <li>Especializado en <b>Java, SQL y ecosistema Web</b></li>
+                <li>💻 Amante del código y las buenas prácticas</li>
+                <li>📚 Aprendiz constante de nuevas tecnologías</li>
+                <li>🤝 Abierto a colaborar en proyectos interesantes</li>
+                <li>🌱 Actualmente profundizando en <b>Java, SQL, HTML, CSS y JavaScript</b></li>
             </ul>
         </section>
 
-        <section class="animate delay-3">
-            <h2>🛠️ Stack Tecnológico</h2>
-            <div class="skill-icons">
-                <img src="https://skillicons.dev/icons?i=java,js,html,css,mysql,firebase,git,github,androidstudio,linux,bootstrap,idea" alt="Tecnologías" />
+        <section class="animate delay-2">
+            <h2>🛠️ Tecnologías y herramientas</h2>
+            
+            <div class="skill-box">
+                <h3>Lenguajes</h3>
+                <div class="skill-icons">
+                    <img src="https://skillicons.dev/icons?i=java,js,html,css" alt="Lenguajes" />
+                </div>
             </div>
+
+            <div class="skill-box">
+                <h3>Bases de Datos</h3>
+                <div class="skill-icons">
+                    <img src="https://skillicons.dev/icons?i=mysql,sqlite,firebase" alt="BBDD" />
+                </div>
+            </div>
+
+            <div class="skill-box">
+                <h3>Entornos y Herramientas</h3>
+                <div class="skill-icons">
+                    <img src="https://skillicons.dev/icons?i=eclipse,vscode,idea,androidstudio,git,github,linux,ubuntu,windows,bash,bootstrap,notion,discord" alt="Tools" />
+                </div>
+            </div>
+        </section>
+
+        <section class="animate delay-3">
+            <h2>📈 Objetivos</h2>
+            <ul>
+                <li>✔️ Finalizar con éxito el ciclo de <b>DAM</b></li>
+                <li>✔️ Desarrollar proyectos propios y en equipo</li>
+                <li>✔️ Crear un <b>portafolio sólido</b></li>
+                <li>✔️ Dar el salto al mundo laboral como desarrollador</li>
+            </ul>
         </section>
 
         <section class="animate delay-4">
             <h2>🚧 Proyecto Destacado</h2>
             <div class="project-card">
-                <h3>🏋️‍♂️ GYMZY</h3>
-                <p style="color: var(--text-dim); margin: 10px 0;">Mi proyecto insignia: una herramienta integral para profesionales del fitness y la nutrición.</p>
-                <a href="https://github.com/danielbl-67/gymzy" target="_blank" class="btn">Explorar Código</a>
+                <h3>🏋️‍♂️ GYMZY (Proyecto Final de Grado)</h3>
+                <p>Aplicación enfocada en ser utilizada y gestionada por nutricionistas y entrenadores personales autónomos. Abierto a ideas y mejoras.</p>
+                <a href="https://github.com/danielbl-67/gymzy" target="_blank" class="btn">REPOSITORIO EN GITHUB</a>
             </div>
         </section>
 
-        <section class="animate delay-5">
+        <section class="animate delay-4">
             <h2>📫 Contacto</h2>
             <div class="contact-grid">
                 <div class="contact-item">
-                    <p style="color: var(--text-dim);">Email</p>
+                    <b>Email</b>
                     <a href="mailto:burdallolopez67@gmail.com">burdallolopez67@gmail.com</a>
                 </div>
                 <div class="contact-item">
-                    <p style="color: var(--text-dim);">GitHub</p>
-                    <a href="https://github.com/danielbl-67" target="_blank">@danielbl-67</a>
+                    <b>GitHub</b>
+                    <a href="https://github.com/danielbl-67" target="_blank">danielbl-67</a>
                 </div>
                 <div class="contact-item">
-                    <p style="color: var(--text-dim);">Instagram</p>
+                    <b>Instagram</b>
                     <a href="https://www.instagram.com/danielbl_67/" target="_blank">@danielbl_67</a>
                 </div>
             </div>
         </section>
+
     </div>
 
 </body>
