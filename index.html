@@ -3,172 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel Burdallo | Portfolio GYMZY Style</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Daniel Burdallo | Portfolio GYMZY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Paleta extraída de GYMZY */
-            --bg-color: #0b0e14;       /* Negro azulado profundo */
-            --card-bg: #161b22;       /* Gris oscuro de tarjeta */
-            --accent: #ff7a00;         /* Naranja GYMZY (Energía/Fitness) */
-            --accent-soft: rgba(255, 122, 0, 0.1);
-            --text-main: #ffffff;
-            --text-secondary: #8b949e;
-            --border: #30363d;
+            /* Paleta GYMZY */
+            --bg-color: #000000;       /* Fondo negro puro como la app */
+            --card-bg: #111111;       /* Gris muy oscuro para las secciones */
+            --accent-red: #ff0000;    /* Rojo GYMZY */
+            --text-white: #ffffff;    /* Letras en blanco */
+            --text-dim: #a0a0a0;      /* Gris para textos secundarios */
+            --border: #222222;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-main);
+            color: var(--text-white);
             line-height: 1.6;
             padding: 20px;
         }
 
-        .container { max-width: 800px; margin: 40px auto; }
+        .container {
+            max-width: 850px;
+            margin: 50px auto;
+        }
 
-        header { text-align: center; margin-bottom: 50px; }
-        
-        h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 10px; }
-        h1 span { color: var(--accent); }
-        
-        .subtitle { color: var(--text-secondary); font-size: 1.1rem; }
+        /* --- HEADER --- */
+        header {
+            text-align: left;
+            margin-bottom: 60px;
+            border-left: 5px solid var(--accent-red);
+            padding-left: 20px;
+        }
 
+        h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        h1 span {
+            color: var(--accent-red);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            font-weight: 400;
+        }
+
+        /* --- SECCIONES --- */
         section {
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            margin-bottom: 25px;
+            padding: 35px;
+            border-radius: 4px; /* Estilo más agresivo/deportivo */
+            margin-bottom: 30px;
             border: 1px solid var(--border);
             transition: all 0.3s ease;
         }
 
         section:hover {
-            border-color: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 122, 0, 0.05);
+            border-color: var(--accent-red);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
         }
 
         h2 {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            color: var(--text-white);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
+        h2::after {
+            content: "";
+            height: 2px;
+            background: var(--accent-red);
+            flex-grow: 1;
+        }
+
+        /* --- LISTAS --- */
+        ul { list-style: none; }
         ul li {
-            list-style: none;
-            margin-bottom: 12px;
-            padding-left: 25px;
-            position: relative;
-            color: var(--text-secondary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: var(--text-white);
         }
 
         ul li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
+            content: "■";
+            color: var(--accent-red);
+            font-size: 0.8rem;
+            margin-top: 6px;
         }
 
-        b { color: var(--text-main); }
-
+        /* --- SKILLS --- */
         .skill-icons {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            background: var(--bg-color);
-            padding: 15px;
-            border-radius: 12px;
+            filter: grayscale(0.2);
+            transition: 0.3s;
         }
 
-        .project-card {
-            border: 2px solid var(--accent);
-            background: var(--accent-soft);
+        .skill-icons:hover { filter: grayscale(0); }
+
+        /* --- PROYECTO DESTACADO --- */
+        .project-highlight {
+            border: 1px solid var(--accent-red);
             padding: 25px;
-            border-radius: 15px;
-            margin-top: 15px;
+            background: linear-gradient(145deg, #111111 0%, #050505 100%);
+            position: relative;
+            overflow: hidden;
         }
 
         .btn {
             display: inline-block;
             margin-top: 20px;
-            padding: 12px 25px;
-            background-color: var(--accent);
+            padding: 12px 30px;
+            background-color: var(--accent-red);
             color: white;
             text-decoration: none;
-            font-weight: 700;
-            border-radius: 50px;
-            transition: transform 0.2s;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 2px;
+            transition: 0.3s;
         }
 
-        .btn:hover { transform: scale(1.05); }
+        .btn:hover {
+            background-color: white;
+            color: black;
+            transform: scale(1.05);
+        }
 
+        /* --- CONTACTO --- */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
 
-        .contact-item a { color: var(--accent); text-decoration: none; font-weight: 600; }
+        .contact-item b { color: var(--accent-red); text-transform: uppercase; font-size: 0.8rem; }
+        .contact-item p { margin-top: 5px; }
+        .contact-item a { color: var(--text-white); text-decoration: none; font-weight: 700; }
+        .contact-item a:hover { color: var(--accent-red); }
 
-        @media (max-width: 600px) { h1 { font-size: 2rem; } }
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
+        
         <header>
-            <h1>💪 Daniel <span>Burdallo</span></h1>
-            <p class="subtitle">Desarrollador Multiplataforma & Creador de <b>GYMZY</b></p>
+            <h1>DANIEL <span>BURDALLO</span></h1>
+            <p class="subtitle">Desarrollador DAM | Creador de GYMZY</p>
         </header>
 
-        <section>
-            <h2>🚀 Sobre mí</h2>
-            <p>Apasionado por la tecnología y el deporte, enfocado en crear soluciones prácticas como **GYMZY**. Especializado en convertir ideas en código eficiente.</p>
+        <section id="sobre-mi">
+            <h2>SOBRE MÍ</h2>
+            <p style="margin-bottom: 20px;">Amante de la programación y el alto rendimiento. Especializado en crear herramientas tecnológicas que resuelven problemas reales con eficiencia y limpieza de código.</p>
             <ul>
-                <li>💻 Especialista en <b>Java y SQL</b></li>
-                <li>📚 En constante formación en el stack Web</li>
-                <li>🤝 Enfocado en el trabajo en equipo</li>
+                <li>Amante del código y las buenas prácticas</li>
+                <li>Aprendiz constante de nuevas tecnologías</li>
+                <li>Actualmente profundizando en <b>Java, SQL, HTML, CSS y JavaScript</b></li>
             </ul>
         </section>
 
-        <section>
-            <h2>🛠️ Stack Tecnológico</h2>
+        <section id="stack">
+            <h2>STACK TECNOLÓGICO</h2>
             <div class="skill-icons">
-                <img src="https://skillicons.dev/icons?i=java,js,html,css,mysql,firebase,git,github,androidstudio,vscode" alt="Tecnologías" />
+                <img src="https://skillicons.dev/icons?i=java,js,html,css,mysql,firebase,git,github,androidstudio,linux,bootstrap" alt="Skills" />
             </div>
         </section>
 
-        <section>
-            <h2>🚧 Proyecto Principal</h2>
-            <div class="project-card">
-                <h3>🏋️‍♂️ GYMZY</h3>
-                <p>Plataforma integral para la gestión de entrenadores y nutricionistas. Mi mayor reto técnico hasta la fecha.</p>
-                <a href="https://github.com/danielbl-67/gymzy" target="_blank" class="btn">Explorar Proyecto</a>
-            </div>
+        <section id="gymzy" class="project-highlight">
+            <h2>PROYECTO: GYMZY</h2>
+            <p>Aplicación diseñada para la gestión profesional de entrenadores y nutricionistas autónomos. Una solución robusta para el sector fitness.</p>
+            <a href="https://github.com/danielbl-67/gymzy" target="_blank" class="btn">Ver Código en GitHub</a>
         </section>
 
-        <section>
-            <h2>📫 Conectemos</h2>
+        <section id="contacto">
+            <h2>CONTACTO</h2>
             <div class="contact-grid">
                 <div class="contact-item">
-                    <strong>Email:</strong><br>
-                    <a href="mailto:burdallolopez67@gmail.com">burdallolopez67@gmail.com</a>
+                    <b>Email</b>
+                    <p><a href="mailto:burdallolopez67@gmail.com">burdallolopez67@gmail.com</a></p>
                 </div>
                 <div class="contact-item">
-                    <strong>GitHub:</strong><br>
-                    <a href="https://github.com/danielbl-67" target="_blank">github.com/danielbl-67</a>
+                    <b>GitHub</b>
+                    <p><a href="https://github.com/danielbl-67" target="_blank">@danielbl-67</a></p>
+                </div>
+                <div class="contact-item">
+                    <b>Instagram</b>
+                    <p><a href="https://www.instagram.com/danielbl_67/" target="_blank">@danielbl_67</a></p>
                 </div>
             </div>
         </section>
+
     </div>
 
 </body>
