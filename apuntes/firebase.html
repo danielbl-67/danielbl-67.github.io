@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base de Conocimiento - Firebase & NoSQL</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --accent: #ffca28; /* Amarillo corporativo de Firebase */
+            --code-bg: #010409;
+            --orange: #f57c00;
+            --green: #3fb950;
+            --red: #f85149;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 { color: var(--accent); margin-bottom: 5px; }
+        h2 { color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 5px; font-size: 1.2rem; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            color: #ff7b72;
+            display: block;
+            margin: 5px 0;
+            word-break: break-all;
+        }
+
+        .inline-code { display: inline; color: var(--orange); }
+
+        .badge {
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .badge-green { background: #238636; color: white; }
+        .badge-orange { background: #b05c00; color: white; }
+        .badge-red { background: #da3633; color: white; }
+
+        .highlight { color: var(--accent); font-weight: bold; }
+        
+        ul { padding-left: 20px; margin: 10px 0; }
+        li { margin-bottom: 8px; }
+        strong { color: #f57c00; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🔥 Base de Conocimiento de Firebase & NoSQL</h1>
+        <p>Guía rápida para <strong>danielbl-67</strong> | Servicios Cloud y bases de datos en tiempo real para móviles</p>
+    </header>
+
+    <section class="card" style="margin-bottom: 20px; border-left: 4px solid var(--accent);">
+        <h2>⚠️ Troubleshooting Firebase: Seguridad y Despliegue</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Problema / Error</th>
+                    <th>¿Por qué pasa?</th>
+                    <th>Solución Limpia / Regla</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Fallo de Permisos:</strong><br><small>Missing or insufficient permissions</small></td>
+                    <td>La app intenta leer o escribir datos en Firestore pero chocas contra las reglas de seguridad por defecto (que bloquean todo en producción).</td>
+                    <td>
+                        <span class="badge badge-orange">Firestore Rules</span>
+                        Configura las reglas en tu consola Cloud para permitir escritura solo a usuarios autenticados:
+                        <code>allow read, write: if request.auth != null;</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Fallo de Auth:</strong><br><small>User token expired</small></td>
+                    <td>El cliente móvil intenta hacer una petición pero la sesión del token de Firebase ha caducado en segundo plano.</td>
+                    <td>
+                        <span class="badge badge-green">FirebaseAuth Listener</span>
+                        Implementa un escuchador dinámico en la app móvil (Android/Kotlin) para refrescar la sesión automáticamente:
+                        <code>FirebaseAuth.getInstance().addAuthStateListener { auth -&gt; ... }</code>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div class="grid">
+        
+        <div class="card">
+            <h2>📁 Cloud Firestore (Bases de datos NoSQL)</h2>
+            <p><strong>Estructura:</strong> A diferencia de SQL, aquí no hay filas ni tablas. Todo se organiza en **Colecciones** que contienen **Documentos** (similares a objetos JSON):</p>
+            <code>// Ejemplo de documento en la colección "entrenadores"<br>
+{<br>
+&nbsp;&nbsp;"id": "USR_9823",<br>
+&nbsp;&nbsp;"nombre": "Daniel Burdallo",<br>
+&nbsp;&nbsp;"especialidad": "Nutrición",<br>
+&nbsp;&nbsp;"activo": true<br>
+}</code>
+        </div>
+
+        <div class="card">
+            <h2>🔄 Datos en Tiempo Real (Realtime Listener)</h2>
+            <p><strong>El Súper Poder de Firebase:</strong> Sincronizar la app al instante sin necesidad de que el usuario refresque la pantalla de forma manual.</p>
+            <p><strong>Cómo funciona:</strong> Creas un escuchador sobre la colección de Firestore que reacciona solo cuando hay cambios en el servidor:</p>
+            <code>db.collection("entrenadores")<br>
+&nbsp;&nbsp;.addSnapshotListener { snapshot, e -&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Actualiza la interfaz del móvil al instante<br>
+&nbsp;&nbsp;}</code>
+        </div>
+
+        <div class="card">
+            <h2>🔒 Autenticación Simplificada</h2>
+            <p><strong>Ventaja:</strong> Firebase gestiona de forma segura el cifrado de contraseñas y las sesiones de usuario en la nube, ahorrándote programar un servidor completo de logins.</p>
+            <p><strong>Flujo estándar:</strong> Comprobar si el usuario ya está logueado al abrir la app móvil:</p>
+            <code>val user = Firebase.auth.currentUser<br>
+if (user != null) {<br>
+&nbsp;&nbsp;// Saltar directo a la pantalla principal de GYMZY<br>
+}</code>
+        </div>
+
+    </div>
+
+    <footer style="margin-top: 30px; text-align: center; font-size: 0.8rem; opacity: 0.6;">
+        Documentación técnica de Daniel Burdallo | Conectando aplicaciones móviles con servicios Cloud eficientes.
+    </footer>
+</div>
+
+</body>
+</html>

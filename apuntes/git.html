@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Git Cheat Sheet - danielbl-67</title>
+    <title>Git Cheat Sheet & Git Bugs - danielbl-67</title>
     <style>
         :root {
             --bg: #0d1117;
@@ -14,6 +14,7 @@
             --code-bg: #010409;
             --orange: #f0883e;
             --green: #3fb950;
+            --red: #f85149;
         }
 
         body {
@@ -73,6 +74,7 @@
             color: #ff7b72;
             display: block;
             margin: 5px 0;
+            word-break: break-all;
         }
 
         .inline-code { display: inline; color: var(--orange); }
@@ -85,18 +87,24 @@
         }
         .badge-green { background: #238636; color: white; }
         .badge-orange { background: #9e6a03; color: white; }
+        .badge-red { background: #da3633; color: white; }
 
         .highlight { color: var(--accent); font-weight: bold; }
+        
+        ul { padding-left: 20px; margin: 10px 0; }
+        li { margin-bottom: 8px; }
+        strong { color: #f0883e; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>🚀 Git Cheat Sheet</h1>
-        <p>Guía rápida para <strong>danielbl-67</strong> | Control de versiones sin pánico</p>
+        <h1>🚀 Git Cheat Sheet & Troubleshooting</h1>
+        <p>Guía rápida para <strong>danielbl-67</strong> | Control de versiones y soluciones a errores comunes de Git</p>
     </header>
 
+    <!-- Tabla comparativa original Git -->
     <section class="card" style="margin-bottom: 20px; border-left: 4px solid var(--accent);">
         <h2>¿git fetch o git pull? ¡No te confundas!</h2>
         <table>
@@ -111,7 +119,7 @@
                 <tr>
                     <td><code class="inline-code">git fetch</code></td>
                     <td>🔎 Descarga cambios remotos</td>
-                    <td><span class="badge" style="background: #da3633;">❌ No</span></td>
+                    <td><span class="badge badge-red">❌ No</span></td>
                 </tr>
                 <tr>
                     <td><code class="inline-code">git pull</code></td>
@@ -121,6 +129,50 @@
             </tbody>
         </table>
         <small>💡 <em>Dato pro: <code>git pull</code> es igual a <code>fetch</code> + <code>merge</code>.</em></small>
+    </section>
+
+    <!-- Nueva sección: Errores típicos y soluciones rápidas (EXCLUSIVO DE GIT) -->
+    <section class="card" style="margin-bottom: 20px; border-left: 4px solid var(--orange);">
+        <h2>⚠️ Troubleshooting Git: Soluciones a Errores Clásicos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Escenario / Error</th>
+                    <th>¿Por qué pasa?</th>
+                    <th>Solución / Comando</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Merge Conflict:</strong><br><small>Automatic merge failed</small></td>
+                    <td>Dos ramas modificaron la misma línea en el mismo archivo y Git no sabe cuál elegir.</td>
+                    <td>
+                        <span class="badge badge-orange">Reparar</span>
+                        Abre el archivo, limpia las marcas <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> y haz un nuevo commit:
+                        <code>git add .</code>
+                        <code>git commit -m "Fix merge conflict"</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Oops, el commit:</strong><br><small>Mensaje erróneo o incompleto</small></td>
+                    <td>Escribiste mal el mensaje del último commit local o te olvidaste de añadir un archivo.</td>
+                    <td>
+                        <span class="badge badge-green">Modificar último</span>
+                        <code>git commit --amend -m "Mensaje corregido"</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>¡Pesa demasiado!</strong><br><small>Fallo en el Push por archivo gigante</small></td>
+                    <td>Añadiste una base de datos <code>.sql</code> pesada o la carpeta <code>node_modules</code> sin querer.</td>
+                    <td>
+                        <span class="badge badge-red">Sacar de Staging</span>
+                        Quita el archivo manteniendo tus cambios intactos:
+                        <code>git rm --cached [nombre_archivo]</code>
+                        <small><em>¡No olvides meterlo luego en tu .gitignore!</em></small>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </section>
 
     <div class="grid">
@@ -141,7 +193,7 @@
             <code>git reset [archivo] <span style="color:gray"># Unstage</span></code>
             <p>Commits:</p>
             <code>git commit -m "Mensaje"</code>
-            <code>git commit --amend --no-edit <span style="color:gray"># Corregir último</span></code>
+            <code>git commit --amend --no-edit <span style="color:gray"># Corregir último sin cambiar texto</span></code>
         </div>
 
         <div class="card">
@@ -179,7 +231,7 @@
     </div>
 
     <footer style="margin-top: 30px; text-align: center; font-size: 0.8rem; opacity: 0.6;">
-       Puedes utilizarlo si te sirve
+        Documentación técnica de Daniel Burdallo | Control de versiones sin pánico.
     </footer>
 </div>
 

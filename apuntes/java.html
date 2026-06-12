@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base de Conocimiento - Java & Spring Boot</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --accent: #58a6ff;
+            --code-bg: #010409;
+            --orange: #f0883e;
+            --green: #3fb950;
+            --red: #f85149;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 { color: var(--accent); margin-bottom: 5px; }
+        h2 { color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 5px; font-size: 1.2rem; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            color: #ff7b72;
+            display: block;
+            margin: 5px 0;
+            word-break: break-all;
+        }
+
+        .inline-code { display: inline; color: var(--orange); }
+
+        .badge {
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .badge-green { background: #238636; color: white; }
+        .badge-orange { background: #9e6a03; color: white; }
+        .badge-red { background: #da3633; color: white; }
+
+        .highlight { color: var(--accent); font-weight: bold; }
+        
+        ul { padding-left: 20px; margin: 10px 0; }
+        li { margin-bottom: 8px; }
+        strong { color: #f0883e; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>☕ Base de Conocimiento de Java & Spring Boot</h1>
+        <p>Guía rápida para <strong>danielbl-67</strong> | Desarrollo Backend y persistencia eficiente</p>
+    </header>
+
+    <section class="card" style="margin-bottom: 20px; border-left: 4px solid var(--accent);">
+        <h2>⚠️ Troubleshooting Java: Errores de Lógica y Mapeo</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fallo / Excepción</th>
+                    <th>¿Por qué pasa?</th>
+                    <th>Solución Limpia / Snippet</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>El clásico del software:</strong><br><small>NullPointerException (NPE)</small></td>
+                    <td>Intentas invocar un método o acceder a un atributo de un objeto que apunta a <code>null</code>.</td>
+                    <td>
+                        <span class="badge badge-green">Uso de Optional&lt;T&gt;</span>
+                        Evita devolver nulls en tus métodos y envuelve la respuesta para obligar a controlar el vacío:
+                        <code>Optional&lt;Usuario&gt; usuarioOpt = usuarioRepository.findById(id);<br>Usuario u = usuarioOpt.orElseThrow(() -&gt; new RuntimeException("No encontrado"));</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Persistencia/JPA:</strong><br><small>LazyInitializationException</small></td>
+                    <td>Intentas acceder a una relación marcada como perezosa (<code>FetchType.LAZY</code>) fuera de una transacción activa (ej: en la vista o controlador).</td>
+                    <td>
+                        <span class="badge badge-orange">@Transactional</span>
+                        Asegúrate de que el método del servicio que recupera los datos mantenga la sesión abierta en la base de datos:
+                        <code>@Transactional(readOnly = true)<br>public List&lt;Pedido&gt; obtenerPedidosUsuario(...) { ... }</code>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div class="grid">
+        
+        <div class="card">
+            <h2>🚀 Filtros y Transformaciones (Java Streams)</h2>
+            <p><strong>Filtrar y mapear listas:</strong> Olvídate de los bucles <code>for</code> gigantes y anidados. Usa Streams para procesar colecciones en una sola línea fluida:</p>
+            <code>List&lt;String&gt; nombresActivos = usuarios.stream()<br>
+            &nbsp;&nbsp;.filter(u -&gt; u.isActivo()) <span style="color:gray">// Filtra la lista</span><br>
+            &nbsp;&nbsp;.map(Usuario::getNombre) <span style="color:gray">// Transforma el objeto a String</span><br>
+            &nbsp;&nbsp;.toList(); <span style="color:gray">// Recolecta el resultado final</span></code>
+            </div>
+
+        <div class="card">
+            <h2>⚖️ Comparación de Objetos (equals & hashCode)</h2>
+            <p><strong>El problema:</strong> En Java, el operador <code>==</code> compara referencias de memoria, no el contenido real de los objetos.</p>
+            <p><strong>Solución Tradicional:</strong> Sobrescribir manualmente los métodos para que digan que dos objetos con el mismo ID son iguales.</p>
+            <p><strong>Solución Moderna (Lombok):</strong> Deja que la librería genere todo el código repetitivo de forma limpia con anotaciones:</p>
+            <code>@Data <span style="color:gray">// Genera Getters, Setters, toString y equals</span><br>
+                @AllArgsConstructor<br>
+                @NoArgsConstructor<br>
+                public class Usuario {<br>
+                &nbsp;&nbsp;private Long id;<br>
+                &nbsp;&nbsp;private String email;<br>
+                }</code>
+        </div>
+
+        <div class="card">
+            <h2>🔌 Inyección de Dependencias en Spring Boot</h2>
+            <p><strong>Buenas prácticas:</strong> Evita usar la anotación <code>@Autowired</code> directamente sobre los atributos (Field Injection), ya que dificulta las pruebas unitarias.</p>
+            <p><strong>Recomendación oficial:</strong> Usa siempre inyección a través del constructor de la clase:</p>
+            <code>@Service<br>
+                public class UsuarioService {<br><br>
+                &nbsp;&nbsp;private final UsuarioRepository repository;<br><br>
+                &nbsp;&nbsp;<span style="color:gray">// Spring inyecta la dependencia aquí automáticamente</span><br>
+                &nbsp;&nbsp;public UsuarioService(UsuarioRepository repository) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;this.repository = repository;<br>
+                &nbsp;&nbsp;}<br>
+                }</code>
+        </div>
+
+    </div>
+
+    <footer style="margin-top: 30px; text-align: center; font-size: 0.8rem; opacity: 0.6;">
+        Documentación técnica de Daniel Burdallo | Código limpio, robusto y escalable.
+    </footer>
+</div>
+
+</body>
+</html>
