@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel Burdallo | Portafolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <title>Daniel Burdallo | Portafolio & Apuntes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f172a;       /* Azul oscuro de tu nuevo portafolio */
-            --section-bg: rgba(30, 41, 59, 0.65); /* Tarjetas translúcidas azuladas */
-            --card-hover-bg: #1e293b;  /* Azul un poco más claro para el hover */
-            --text-main: #f8fafc;      /* Blanco brillante */
-            --text-secondary: #cbd5e1; /* Gris azulado claro */
-            --accent-blue: #38bdf8;    /* El azul brillante / cian de tus etiquetas */
-            --border-color: rgba(56, 189, 248, 0.15); /* Bordes sutiles azul neón */
+            --bg-color: #0b1120;
+            --section-bg: rgba(30, 41, 59, 0.55);
+            --card-bg: rgba(15, 23, 42, 0.65);
+            --card-hover-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.15);
+            --border-color: rgba(56, 189, 248, 0.12);
+            --border-hover: rgba(56, 189, 248, 0.4);
+            --tag-bg: rgba(56, 189, 248, 0.1);
         }
 
-        /* Animación de entrada */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(16px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .animate { opacity: 0; animation: fadeIn 0.6s ease forwards; }
+        .animate { opacity: 0; animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
@@ -30,100 +35,164 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 0% 50%, rgba(14, 165, 233, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
             color: var(--text-main);
             line-height: 1.6;
-            padding: 40px 20px;
+            padding: 50px 20px;
+            min-height: 100vh;
         }
 
-        .container { max-width: 800px; margin: 0 auto; }
+        .container { max-width: 860px; margin: 0 auto; }
 
+        /* Header */
         header { 
-            margin-bottom: 50px; 
-            padding-bottom: 30px;
+            margin-bottom: 40px; 
+            padding-bottom: 25px;
             border-bottom: 1px solid var(--border-color);
         }
-        
-        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main); }
-        h1 span { color: var(--accent-blue); }
-        .hero-desc { font-size: 1.1rem; color: var(--text-secondary); }
 
-        section { 
-            margin-bottom: 30px; 
-            background: var(--section-bg);
-            padding: 30px;
-            border-radius: 16px; /* Bordes más suaves idénticos a los nuevos */
+        .web-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--tag-bg);
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(8px); /* Efecto cristal esmerilado de fondo */
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            color: var(--accent-blue);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 18px;
+            transition: all 0.25s ease;
+        }
+
+        .web-pill:hover {
+            border-color: var(--accent-blue);
+            background: rgba(56, 189, 248, 0.18);
+            transform: translateY(-1px);
         }
         
-        section:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-blue);
-            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.15); /* Brillo azul suave */
+        h1 { font-size: 2.4rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em; }
+        h1 span { color: var(--accent-blue); }
+        .hero-desc { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 4px; }
+
+        /* Cards & Sections */
+        section { 
+            margin-bottom: 28px; 
+            background: var(--section-bg);
+            padding: 30px;
+            border-radius: 18px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: border-color 0.3s ease;
         }
 
         h2 {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: 20px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             gap: 10px;
             color: var(--accent-blue);
         }
 
-        p { margin-bottom: 15px; color: var(--text-secondary); }
-        ul { list-style: none; }
-        ul li { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; color: var(--text-secondary); }
-        b { color: var(--accent-blue); } /* Destacados en azul */
+        p { color: var(--text-secondary); font-size: 0.95rem; }
+        ul { list-style: none; margin-top: 10px; }
+        ul li { 
+            margin-bottom: 8px; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            color: var(--text-secondary); 
+            font-size: 0.95rem;
+        }
+        b { color: #e2e8f0; font-weight: 600; }
 
-        /* REPOS / CATEGORIES HUB */
+        /* Hub Grid */
         .repo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-top: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+            margin-top: 20px;
         }
+
         .repo-card {
-            background: rgba(15, 23, 42, 0.6);
-            padding: 18px;
-            border-radius: 12px;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 14px;
             border: 1px solid var(--border-color);
             text-decoration: none;
-            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         .repo-card:hover {
             background: var(--card-hover-bg);
             border-color: var(--accent-blue);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px var(--accent-glow);
         }
-        .repo-card h4 { color: var(--text-main); margin-bottom: 8px; font-weight: 700; }
-        .repo-card p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0; line-height: 1.4; }
 
-        .btn-link {
-            display: inline-block;
-            margin-top: 15px;
-            color: #0f172a; /* Letras oscuras para contrastar con el fondo brillante */
-            background-color: var(--accent-blue);
-            font-weight: 700;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .repo-card h4 { 
+            color: var(--text-main); 
+            font-size: 1rem; 
+            font-weight: 700; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .repo-card p { 
+            font-size: 0.85rem; 
+            color: var(--text-secondary); 
+            line-height: 1.45;
+            margin-bottom: 12px;
+        }
+
+        .card-tag {
+            align-self: flex-start;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            background: var(--tag-bg);
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
             text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
-        }
-        .btn-link:hover { 
-            background: #7dd3fc; 
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+            letter-spacing: 0.03em;
         }
 
-        @media (max-width: 600px) { h1 { font-size: 2rem; } section { padding: 20px; } }
+        /* Footer */
+        footer {
+            text-align: center;
+            padding-top: 20px;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) { 
+            body { padding: 30px 15px; }
+            h1 { font-size: 1.85rem; } 
+            section { padding: 20px; } 
+            .repo-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -131,70 +200,116 @@
     <div class="container">
         
         <header class="animate">
-            <p style="margin-bottom: 12px;">
-                <a href="https://danielbl67.vercel.app/" target="_blank" rel="noopener noreferrer" style="color: var(--accent-blue); font-weight: 700; text-decoration: none;">
-                    🌐 Visita mi web
-                </a>
-            </p>
+            <a href="https://burdallodev.vercel.app/" target="_blank" rel="noopener noreferrer" class="web-pill">
+                <span>🌐</span> Visita mi web personal ↗
+            </a>
             <h1>👋 ¡Hola! Soy <span>Daniel Burdallo</span></h1>
             <p class="hero-desc">🎓 Estudiante de <b>Desarrollo de Aplicaciones Multiplataforma (DAM)</b></p>
-            <p class="hero-desc">💡 Futuro desarrollador de <b>aplicaciones móviles, de escritorio y web</b></p>
+            <p class="hero-desc">💡 Desarrollador enfocado en <b>entornos móviles, web y backend</b></p>
         </header>
 
         <section class="animate delay-1">
             <h2>🚀 Sobre mí</h2>
-            <p>Soy un chico al que le gusta la programación y la tecnología, con muchas ganas de aprender y crecer en el mundo del desarrollo de software.</p>
+            <p>Apasionado por la tecnología, el desarrollo de software y la resolución eficiente de problemas.</p>
             <ul>
-                <li>💻 Amante del código y las buenas prácticas</li>
-                <li>🌱 Actualmente profundizando en <b>Java, SQL y Web</b></li>
+                <li>💻 Enfoque en código modular, buenas prácticas y arquitectura limpia</li>
+                <li>🌱 Stack actual: <b>Angular, Java / Spring Boot, SQL, Git</b></li>
             </ul>
         </section>
 
         <!-- ========================================================================== -->
-        <!-- REPOSITORIOS Y HUB DE APUNTES TÉCNICOS                                     -->
+        <!-- REPOSITORIOS Y HUB DE APUNTES TÉCNICOS                                      -->
         <!-- ========================================================================== -->
         <section class="animate delay-2">
             <h2>📂 Categorías y Documentación Técnica</h2>
-            <p>Accede a mis guías rápidas, solución de errores y recursos de control de versiones:</p>
+            <p>Guías rápidas, chuletas de comandos y documentación de referencia personal:</p>
             
             <div class="repo-grid">
-                <!-- Tarjeta 1: Git Cheat Sheet -->
+                
+                <!-- Tarjeta: Angular CLI (NUEVA) -->
+                <a href="./apuntes/angular.html" class="repo-card">
+                    <div>
+                        <div class="card-header">
+                            <h4>🅰️ Angular & CLI</h4>
+                        </div>
+                        <p>Comandos esenciales de Angular CLI, componentes standalone, routing y compilación.</p>
+                    </div>
+                    <span class="card-tag">Frontend</span>
+                </a>
+
+                <!-- Tarjeta: Git Cheat Sheet -->
                 <a href="./apuntes/git.html" class="repo-card">
-                    <h4>🚀 Git & GitHub</h4>
-                    <p>Guía rápida de comandos esenciales y troubleshooting de control de versiones.</p>
+                    <div>
+                        <div class="card-header">
+                            <h4>🚀 Git & GitHub</h4>
+                        </div>
+                        <p>Control de versiones, flujo de ramas, rebasing y solución a problemas de sincronización.</p>
+                    </div>
+                    <span class="card-tag">DevOps</span>
                 </a>
 
-                <!-- Tarjeta 2: SQL Notes -->
-                <a href="./apuntes/sql.html" class="repo-card">
-                    <h4>🗄️ SQL & Bases de Datos</h4>
-                    <p>Consultas multi-tabla, rendimiento y solución a errores de persistencia.</p>
-                </a>
-
-                <!-- Tarjeta 3: Java & Spring Boot -->
+                <!-- Tarjeta: Java & Spring Boot -->
                 <a href="./apuntes/java.html" class="repo-card">
-                    <h4>☕ Java & Spring Boot</h4>
-                    <p>Snippets de código moderno con Streams, Lombok e inyección de dependencias.</p>
+                    <div>
+                        <div class="card-header">
+                            <h4>☕ Java & Spring</h4>
+                        </div>
+                        <p>Snippets modernos, POO, colecciones, inyección de dependencias y arquitectura REST.</p>
+                    </div>
+                    <span class="card-tag">Backend</span>
                 </a>
 
-                <!-- Tarjeta 4: APIs REST -->
+                <!-- Tarjeta: SQL Notes -->
+                <a href="./apuntes/sql.html" class="repo-card">
+                    <div>
+                        <div class="card-header">
+                            <h4>🗄️ SQL & BBDD</h4>
+                        </div>
+                        <p>Consultas estructuradas, joins, diseño relacional y buenas prácticas de persistencia.</p>
+                    </div>
+                    <span class="card-tag">Bases de Datos</span>
+                </a>
+
+                <!-- Tarjeta: APIs REST -->
                 <a href="./apuntes/api-rest.html" class="repo-card">
-                    <h4>📡 APIs REST & HTTP</h4>
-                    <p>Mapeo de verbos semánticos, buenas prácticas y control de estados HTTP (Status Codes).</p>
+                    <div>
+                        <div class="card-header">
+                            <h4>📡 APIs REST & HTTP</h4>
+                        </div>
+                        <p>Verbos HTTP, códigos de estado, diseño semántico y consumo desde clientes frontend.</p>
+                    </div>
+                    <span class="card-tag">Protocolos</span>
                 </a>
 
-                <!-- Tarjeta 5: Firebase -->
+                <!-- Tarjeta: Firebase -->
                 <a href="./apuntes/firebase.html" class="repo-card">
-                    <h4>🔥 Firebase & NoSQL</h4>
-                    <p>Servicios en la nube, estructuras JSON y sincronización de datos para entornos móviles.</p>
+                    <div>
+                        <div class="card-header">
+                            <h4>🔥 Firebase & NoSQL</h4>
+                        </div>
+                        <p>Autenticación, Firestore, reglas de seguridad y sincronización en tiempo real.</p>
+                    </div>
+                    <span class="card-tag">Cloud</span>
                 </a>
 
-                <!-- Tarjeta 6: Repositorios Globales -->
-                <a href="https://github.com/danielbl-67?tab=repositories" target="_blank" class="repo-card" style="border-color: rgba(56, 189, 248, 0.3); background: rgba(30, 41, 59, 0.4);">
-                    <h4>📦 Todos los Repositorios</h4>
-                    <p>Accede de forma directa a mi listado completo de repositorios y proyectos de GitHub.</p>
+                <!-- Tarjeta: Repositorios Globales -->
+                <a href="https://github.com/danielbl-67?tab=repositories" target="_blank" rel="noopener noreferrer" class="repo-card" style="border-color: rgba(56, 189, 248, 0.25);">
+                    <div>
+                        <div class="card-header">
+                            <h4>📦 Repositorios GitHub</h4>
+                        </div>
+                        <p>Explora todos mis proyectos de código abierto y repositorios en GitHub.</p>
+                    </div>
+                    <span class="card-tag">GitHub ↗</span>
                 </a>
+
             </div>
         </section>
+
+        <footer class="animate delay-3">
+            <p>Daniel Burdallo · github.io</p>
+        </footer>
+
     </div>
     
 </body>
